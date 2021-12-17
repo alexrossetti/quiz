@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Question from "../../components/Question";
-import { mockQuestions } from "./mockQuestions";
+import { useQuestions } from "../../contexts/QuestionsContext";
 
-export default function Quiz({ questions = mockQuestions }) {
+export default function Quiz() {
+	const { questions } = useQuestions();
 	const navigate = useNavigate();
 	const [index, setIndex] = useState(0);
 
