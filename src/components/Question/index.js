@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Answer from "../Answer";
 
-export default function Question({ entry }) {
+export default function Question({ entry, setUserResponse }) {
 	const [selected, setSelected] = useState(null);
+
+	useEffect(() => {
+		setSelected(null);
+	}, [entry]);
 
 	if (!entry) {
 		return null;
@@ -13,8 +17,9 @@ export default function Question({ entry }) {
 	const answers = [...incorrect_answers, correct_answer].sort();
 
 	// TODO: update this to handle answers with multiple answers (if they exist)
-	const handleAnswerClick = (index, isCorrect) => {
+	const handleAnswerClick = (index, userResponse) => {
 		setSelected(selected === index ? null : index);
+		setUserResponse(selected === index ? null : userResponse);
 	};
 
 	return (
@@ -26,10 +31,15 @@ export default function Question({ entry }) {
 					const isCorrect = item === correct_answer;
 					const isSelected = index === selected;
 
+					const userResponse = {
+						isCorrect,
+						answer: item,
+					};
+
 					return (
 						<Answer
 							isSelected={isSelected}
-							handleClick={() => handleAnswerClick(index, isCorrect)}
+							handleClick={() => handleAnswerClick(index, userResponse)}
 							text={item}
 							key={index}
 						/>

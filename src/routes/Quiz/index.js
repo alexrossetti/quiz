@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Question from "../../components/Question";
 import { useQuestions } from "../../contexts/QuestionsContext";
+import { useResponses } from "../../contexts/ResponsesContext";
 
 export default function Quiz() {
 	const { questions } = useQuestions();
+	const { responses, setResponses } = useResponses();
 	const navigate = useNavigate();
 	const [index, setIndex] = useState(0);
+	const [userResponse, setUserResponse] = useState(null);
 
 	useEffect(() => {
 		navigate(`/quiz/${index}`);
+		setUserResponse(null);
 	}, [index]);
 
 	useEffect(() => {
-		console.log(questions);
 		if (!questions || questions.length === 0) {
 			navigate("/");
 		}
@@ -27,11 +30,23 @@ export default function Quiz() {
 		}
 	};
 
+	// add the answer to the responses context, move to the next question
+	const handleSubmitAnswer = () => {
+		setResponses([...responses, userResponse]);
+		handleNextButtonClick();
+	};
+
 	return (
 		<>
 			<h1>Quiz</h1>
-			<Question entry={questions[index]} />
+			<Question entry={questions[index]} setUserResponse={setUserResponse} />
 			<button onClick={() => handleNextButtonClick()}>Next</button>
+			<button
+				disabled={userResponse === null}
+				onClick={() => handleSubmitAnswer()}
+			>
+				Submit
+			</button>
 		</>
 	);
 }
