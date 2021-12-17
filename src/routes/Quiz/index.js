@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Question from "../../components/Question";
+import { mockQuestions } from "./mockQuestions";
 
-export default function Quiz({ questions }) {
+export default function Quiz({ questions = mockQuestions }) {
 	const navigate = useNavigate();
 	const [index, setIndex] = useState(0);
 
@@ -10,6 +12,7 @@ export default function Quiz({ questions }) {
 	}, [index]);
 
 	useEffect(() => {
+		console.log(questions);
 		if (!questions || questions.length === 0) {
 			navigate("/");
 		}
@@ -23,10 +26,10 @@ export default function Quiz({ questions }) {
 		}
 	};
 
-	console.log(questions);
 	return (
 		<>
 			<h1>Quiz</h1>
+			<Question entry={questions[index]} />
 			<button onClick={() => handleNextButtonClick()}>Next</button>
 		</>
 	);

@@ -4,11 +4,10 @@ import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { Themes, GlobalStyles } from "./styles.js";
 import Home from "./routes/Home";
 import Quiz from "./routes/Quiz";
+import Results from "./routes/Results";
+import { mockQuestions } from "./routes/Quiz/mockQuestions.js";
 
-const mockQuestions = [
-	{ question: "Test question", answers: ["Ans 1", "Ans 2"] },
-	{ question: "Test question", answers: ["Ans 1", "Ans 2"] },
-];
+const endpoint = "https://opentdb.com/api.php?amount=10";
 
 export default function App() {
 	const navigate = useNavigate();
@@ -16,7 +15,13 @@ export default function App() {
 
 	// TODO: use API request to get/set questions
 	const getQuestions = () => {
-		setQuestions([...mockQuestions]);
+		// setQuestions([...mockQuestions]);
+		fetch(endpoint)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				setQuestions(data.results);
+			});
 	};
 
 	useEffect(() => {
@@ -32,9 +37,9 @@ export default function App() {
 			<Routes>
 				<Route index path="/" element={<Home getQuestions={getQuestions} />} />
 				<Route path="/quiz">
-					<Route path=":id" element={<Quiz questions={questions} />} />
+					<Route path=":id" element={<Quiz questions={mockQuestions} />} />
 				</Route>
-				<Route path="/results" element={<h1>Results</h1>} />
+				<Route path="/results" element={<Results />} />
 				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>
 		</ThemeProvider>
