@@ -1,6 +1,7 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
+import ProgressBar from "../../components/ProgressBar";
 import { useResponses } from "../../contexts/ResponsesContext";
 
 export default function Results() {
@@ -15,6 +16,9 @@ export default function Results() {
 
 	return (
 		<>
+			<Header>
+				<ProgressBar />
+			</Header>
 			<h1>Results</h1>
 			<button onClick={() => navigate("/")}>Back to start</button>
 		</>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Question from "../../components/Question";
+import ProgressBar from "../../components/ProgressBar";
 import { useQuestions } from "../../contexts/QuestionsContext";
 import { useResponses } from "../../contexts/ResponsesContext";
+import Header from "../../components/Header";
 
 export default function Quiz() {
 	const { questions } = useQuestions();
@@ -38,6 +40,9 @@ export default function Quiz() {
 
 	return (
 		<>
+			<Header>
+				<ProgressBar />
+			</Header>
 			<h1>Quiz</h1>
 			<Question entry={questions[index]} setUserResponse={setUserResponse} />
 			<button onClick={() => handleNextButtonClick()}>Next</button>

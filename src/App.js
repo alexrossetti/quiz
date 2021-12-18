@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { Themes, GlobalStyles } from "./styles.js";
@@ -19,7 +19,6 @@ export default function App() {
 		// fetch(endpoint)
 		// 	.then((res) => res.json())
 		// 	.then((data) => {
-		// 		console.log(data);
 		// 		setQuestions(data.results);
 		// 	});
 
