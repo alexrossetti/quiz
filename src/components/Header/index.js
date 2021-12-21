@@ -11,4 +11,6 @@ const Wrapper = styled.header`
 	align-items: center;
 	padding: 0px 10px;
 	box-shadow: 0px 5px 8px #666;
+	font-size: 2rem;
+	font-weight: bold;
 `;

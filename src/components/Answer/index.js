@@ -13,4 +13,9 @@ const StyledAnswer = styled.button`
 	background: ${(props) => (props.isSelected ? "lightblue" : "white")};
 	padding: 15px 30px;
 	text-align: left;
+	font-size: 1rem;
+
+	&:not(:last-child) {
+		margin-bottom: 5px;
+	}
 `;
