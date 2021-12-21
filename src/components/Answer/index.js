@@ -11,11 +11,17 @@ export default function Answer({ handleClick, text, isSelected }) {
 
 const StyledAnswer = styled.button`
 	background: ${(props) => (props.isSelected ? "lightblue" : "white")};
-	padding: 15px 30px;
+	padding: 18px 30px;
 	text-align: left;
 	font-size: 1rem;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+
+	&:hover {
+		background: #00ccff;
+	}
 
 	&:not(:last-child) {
-		margin-bottom: 5px;
+		margin-bottom: 10px;
 	}
 `;

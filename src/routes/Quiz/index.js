@@ -5,6 +5,7 @@ import ProgressBar from "../../components/ProgressBar";
 import { useQuestions } from "../../contexts/QuestionsContext";
 import { useResponses } from "../../contexts/ResponsesContext";
 import Header from "../../components/Header";
+import styled from "styled-components";
 
 export default function Quiz() {
 	const { questions } = useQuestions();
@@ -43,15 +44,40 @@ export default function Quiz() {
 			<Header>
 				<ProgressBar />
 			</Header>
-			<h1>Quiz</h1>
-			<Question entry={questions[index]} setUserResponse={setUserResponse} />
-			<button onClick={() => handleNextButtonClick()}>Next</button>
-			<button
-				disabled={userResponse === null}
-				onClick={() => handleSubmitAnswer()}
-			>
-				Submit
-			</button>
+			<Content>
+				<Question entry={questions[index]} setUserResponse={setUserResponse} />
+				{/* <button onClick={() => handleNextButtonClick()}>Next</button> */}
+				<Submit
+					disabled={userResponse === null}
+					onClick={() => handleSubmitAnswer()}
+				>
+					Submit
+				</Submit>
+			</Content>
 		</>
 	);
 }
+
+const Content = styled.div`
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+const Submit = styled.button`
+	border: 1px solid purple;
+	background: white;
+	padding: 15px;
+	border-radius: 5px;
+	width: 150px;
+	cursor: default;
+
+	&:not(:disabled) {
+		&:hover {
+			background: darkblue;
+			color: white;
+			cursor: pointer;
+		}
+	}
+`;

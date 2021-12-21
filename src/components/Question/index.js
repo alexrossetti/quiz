@@ -23,9 +23,9 @@ export default function Question({ entry, setUserResponse }) {
 	};
 
 	return (
-		<div>
-			<h2>{question}</h2>
-			<h3>{category}</h3>
+		<Wrapper>
+			<h2>{category}</h2>
+			<h1>{question}</h1>
 			<AnswerContainer>
 				{answers.map((item, index) => {
 					const isCorrect = item === correct_answer;
@@ -46,12 +46,28 @@ export default function Question({ entry, setUserResponse }) {
 					);
 				})}
 			</AnswerContainer>
-		</div>
+		</Wrapper>
 	);
 }
 
+const Wrapper = styled.div`
+	h2 {
+		font-size: 1.25rem;
+		color: #333;
+		padding-bottom: 10px;
+		border-bottom: 2px solid #333;
+		margin-bottom: 10px;
+		margin-top: 10px;
+	}
+
+	h1 {
+		font-size: 1.5rem;
+		line-height: 1.75rem;
+		margin-bottom: 30px;
+	}
+`;
 const AnswerContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin: 10px 0px;
+	margin: 10px 0px 30px;
 `;
