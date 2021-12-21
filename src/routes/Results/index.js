@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Header from "../../components/Header";
 import ProgressBar from "../../components/ProgressBar";
 import { useResponses } from "../../contexts/ResponsesContext";
+import { PageWrapper } from "../../styles";
 
 export default function Results() {
 	const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function Results() {
 	}, []);
 
 	return (
-		<>
+		<PageWrapper>
 			<Header>
 				<ProgressBar />
 			</Header>
@@ -40,7 +41,7 @@ export default function Results() {
 					Play again
 				</button>
 			</Content>
-		</>
+		</PageWrapper>
 	);
 }
 
@@ -50,6 +51,8 @@ const Content = styled.div`
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
+	background: ${(props) => props.theme.backgroundPrimary};
+	flex: 1;
 
 	h1 {
 		font-size: 1.75rem;

@@ -6,6 +6,7 @@ import { useQuestions } from "../../contexts/QuestionsContext";
 import { useResponses } from "../../contexts/ResponsesContext";
 import Header from "../../components/Header";
 import styled from "styled-components";
+import { PageWrapper } from "../../styles";
 
 export default function Quiz() {
 	const { questions } = useQuestions();
@@ -40,13 +41,12 @@ export default function Quiz() {
 	};
 
 	return (
-		<>
+		<PageWrapper>
 			<Header>
 				<ProgressBar />
 			</Header>
 			<Content>
 				<Question entry={questions[index]} setUserResponse={setUserResponse} />
-				{/* <button onClick={() => handleNextButtonClick()}>Next</button> */}
 				<Submit
 					disabled={userResponse === null}
 					onClick={() => handleSubmitAnswer()}
@@ -54,7 +54,7 @@ export default function Quiz() {
 					Submit
 				</Submit>
 			</Content>
-		</>
+		</PageWrapper>
 	);
 }
 
@@ -63,6 +63,8 @@ const Content = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background: ${(props) => props.theme.backgroundPrimary};
+	flex: 1;
 `;
 
 const Submit = styled.button`

@@ -7,12 +7,14 @@ import Quiz from "./routes/Quiz";
 import Results from "./routes/Results";
 import { mockQuestions } from "./routes/Quiz/mockQuestions.js";
 import { useQuestions } from "./contexts/QuestionsContext.js";
+import useTheme from "./hooks/useTheme.js";
 
 const endpoint = "https://opentdb.com/api.php?amount=10";
 
 export default function App() {
 	const navigate = useNavigate();
 	const { questions, setQuestions } = useQuestions();
+	const { theme, toggleTheme } = useTheme();
 
 	// TODO: use API request to get/set questions
 	const getQuestions = () => {
@@ -32,11 +34,21 @@ export default function App() {
 		}
 	}, [questions]);
 
+	useEffect(() => {
+		console.log(theme);
+	}, [theme]);
+
 	return (
-		<ThemeProvider theme={Themes["default"]}>
+		<ThemeProvider theme={Themes[theme]}>
 			<GlobalStyles />
 			<Routes>
-				<Route index path="/" element={<Home getQuestions={getQuestions} />} />
+				<Route
+					index
+					path="/"
+					element={
+						<Home getQuestions={getQuestions} toggleTheme={toggleTheme} />
+					}
+				/>
 				<Route path="/quiz">
 					<Route path=":id" element={<Quiz />} />
 				</Route>

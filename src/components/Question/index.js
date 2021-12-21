@@ -53,9 +53,8 @@ export default function Question({ entry, setUserResponse }) {
 const Wrapper = styled.div`
 	h2 {
 		font-size: 1.25rem;
-		color: #333;
 		padding-bottom: 10px;
-		border-bottom: 2px solid #333;
+		border-bottom: 2px solid ${(props) => props.theme.fontPrimary};
 		margin-bottom: 10px;
 		margin-top: 10px;
 	}
